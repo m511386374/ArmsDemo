@@ -1,0 +1,55 @@
+package www.goodycom.com.armsdemo.mvp.model;
+
+import android.app.Application;
+
+import com.google.gson.Gson;
+import com.jess.arms.integration.IRepositoryManager;
+import com.jess.arms.mvp.BaseModel;
+
+import com.jess.arms.di.scope.FragmentScope;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.cache.CacheMode;
+import com.lzy.okgo.model.Response;
+import com.lzy.okrx2.adapter.ObservableResponse;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import io.reactivex.Observable;
+import www.goodycom.com.armsdemo.mvp.contract.TestContract;
+import www.goodycom.com.armsdemo.mvp.model.Bean.LoginModel;
+import www.goodycom.com.armsdemo.net.JsonConvert;
+import www.goodycom.com.armsdemo.net.LzyResponse;
+
+import static www.goodycom.com.armsdemo.mvp.model.MainModel.API_BASE_URL;
+
+
+@FragmentScope
+public class TestModel extends BaseModel implements TestContract.Model {
+    @Inject
+    Gson mGson;
+    @Inject
+    Application mApplication;
+
+    @Inject
+    public TestModel(IRepositoryManager repositoryManager) {
+        super(repositoryManager);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.mGson = null;
+        this.mApplication = null;
+    }
+
+    @Override
+    public Observable<Response<LzyResponse<List<LoginModel>>>> getDate(String code, int count, int page) {
+        return OkGo.<LzyResponse<List<LoginModel>>>get(API_BASE_URL+code+"/"+count+""+"/"+page+"")//
+                .cacheKey("MainModel")
+                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
+                .converter(new JsonConvert<LzyResponse<List<LoginModel>>>(){})//
+                .adapt(new ObservableResponse<LzyResponse<List<LoginModel>>>());
+    }
+}

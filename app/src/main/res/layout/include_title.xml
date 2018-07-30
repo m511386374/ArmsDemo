@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:titlebar="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+    android:id="@+id/titlebar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    titlebar:centerText="标题栏"
+    titlebar:centerType="textView"
+    titlebar:leftDrawable="@drawable/comm_titlebar_back_normal"
+    titlebar:leftDrawablePadding="0dp"
+    titlebar:leftText="返回"
+    titlebar:statusBarColor="@color/whiteColor"
+    titlebar:fillStatusBar="true"
+    titlebar:leftType="textView"
+        />
+    <!--<com.wuhenzhizao.titlebar.widget.CommonTitleBar-->
+    <!--android:id="@+id/titlebar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--titlebar:centerType="searchView"-->
+    <!--titlebar:leftType="imageButton"-->
+    <!--titlebar:rightText="确定"-->
+    <!--titlebar:statusBarColor="@color/whiteColor"-->
+    <!--titlebar:fillStatusBar="true"-->
+    <!--titlebar:rightType="textView" />-->
+</LinearLayout>
